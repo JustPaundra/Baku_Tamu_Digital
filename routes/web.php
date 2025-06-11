@@ -111,6 +111,7 @@ Route::prefix('admin/crud')->name('crud.')->group(function () {
         Route::get('/{guestCategory}/edit', [CrudManagementController::class, 'guestCategoriesEdit'])->name('edit');
         Route::put('/{guestCategory}', [CrudManagementController::class, 'guestCategoriesUpdate'])->name('update');
         Route::delete('/{guestCategory}', [CrudManagementController::class, 'guestCategoriesDestroy'])->name('destroy');
+        Route::put('/crud-management/guest-categories/{id}', [GuestCategoryController::class, 'update'])->name('crud-management.guest-categories.update');
     });
 
     // Settings CRUD
