@@ -265,9 +265,11 @@
 
         <div class="form-container">
             <div class="breadcrumb">
-                <a href="{{ route('dashboard') }}"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="{{ route('admin') }}"><i class="fas fa-home"></i> Admin Dashboard</a>
                 <span class="separator"><i class="fas fa-chevron-right"></i></span>
-                <a href="{{ route('crud-management.guest-categories.index') }}">Kategori Tamu</a>
+                <a href="{{ route('crud.index') }}">CRUD Management</a>
+                <span class="separator"><i class="fas fa-chevron-right"></i></span>
+                <a href="{{ route('crud.guest-categories.index') }}">Kategori Tamu</a>
                 <span class="separator"><i class="fas fa-chevron-right"></i></span>
                 <span>Edit</span>
             </div>
@@ -284,7 +286,7 @@
                 Pastikan semua informasi yang dimasukkan sudah benar sebelum menyimpan perubahan.
             </div>
 
-            <form action="{{ route('crud-management.guest-categories.update', $guestCategory->id) }}" method="POST" id="editForm">
+            <form action="{{ route('crud.guest-categories.update', $guestCategory->id) }}" method="POST" id="editForm">
                 @csrf
                 @method('PUT')
                 
@@ -329,13 +331,33 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="color">
+                        <i class="fas fa-palette"></i> Warna Kategori
+                    </label>
+                    <input 
+                        type="color" 
+                        class="form-control @error('color') error @enderror" 
+                        id="color" 
+                        name="color" 
+                        value="{{ old('color', $guestCategory->color ?? '#6366f1') }}"
+                        style="height: 60px;"
+                    >
+                    @error('color')
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="status">
                         <i class="fas fa-toggle-on"></i> Status
                     </label>
                     <select class="form-control @error('status') error @enderror" id="status" name="status" required>
                         <option value="">Pilih Status</option>
-                        <option value="1" {{ old('status', $guestCategory->status) == '1' ? 'selected' : '' }}>Aktif</option>
-                        <option value="0" {{ old('status', $guestCategory->status) == '0' ? 'selected' : '' }}>Tidak Aktif</option>
+                        <option value="active" {{ old('status', $guestCategory->status) == 'active' ? 'selected' : '' }}>Aktif</option>
+                        <option value="inactive" {{ old('status', $guestCategory->status) == 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
                     </select>
                     @error('status')
                         <div class="error-message">
@@ -346,7 +368,7 @@
                 </div>
 
                 <div class="button-group">
-                    <a href="{{ route('crud-management.guest-categories.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('crud.guest-categories.index') }}" class="btn btn-secondary">
                         <i class="fas fa-times"></i> Batal
                     </a>
                     <button type="submit" class="btn btn-primary">
