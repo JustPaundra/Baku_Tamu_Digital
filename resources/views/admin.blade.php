@@ -11,6 +11,104 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Improved CRUD Management Button Styles */
+        .crud-management-section {
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        /* Alternative color schemes - choose one */
+        .crud-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            /* Option 3: Warm complement to red */
+            background: linear-gradient(135deg, #FF7043 0%, #FF5722 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .crud-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+            background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+            color: white;
+            text-decoration: none;
+        }
+
+        .crud-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .crud-btn i {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .crud-management-section {
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+            
+            .crud-btn {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+        }
+
+        /* Integration with existing search-filter styles */
+        .search-filter-container {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 24px;
+        }
+
+        .search-filter-grid {
+            display: grid;
+            grid-template-columns: 1fr 200px auto;
+            gap: 16px;
+            align-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            .search-filter-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .button-group {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                justify-content: center;
+            }
+        }
+
+        /* Ensure consistent button styling */
+        .export-btn, .print-btn {
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
 <body>
     <div class="min-h-screen">
@@ -25,14 +123,15 @@
             </div>
         </div>
 
-
         <div class="main-content">
-             <div class="crud-management-section">
-    <a href="{{ route('crud.index') }}" class="crud-btn">
-        <i class="fas fa-cogs"></i>
-        Kelola Data Master
-    </a>
-</div>
+            <!-- CRUD Management Section - Improved -->
+            <div class="crud-management-section">
+                <a href="{{ route('crud.index') }}" class="crud-btn">
+                    <i class="fas fa-database"></i>
+                    Kelola Data Master
+                </a>
+            </div>
+
             <!-- Search and Filter Section -->
             <div class="search-filter-container">
                 <div class="search-filter-grid">
@@ -98,8 +197,6 @@
                 </div>
             </div>
             
-
-
             <!-- Modal untuk memilih rentang tanggal -->
             <div id="datePickerModal" class="modal">
                 <div class="modal-content">
